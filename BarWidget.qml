@@ -54,6 +54,20 @@ BarWidget {
     // `ink` is measured at pixelSize 100, so scale from there, not from iconSize.
     return ink > 0 ? 100 * root.iconInkHeight / ink : root.iconSize
   }
+
+  // OpticalGlyph centres the glyph's line box, not its ink, so two glyphs of
+  // equal height can still sit a pixel or two apart. Shift each one so the
+  // painted ink is centred.
+  TextMetrics {
+    id: iconInk
+    font.family: root.bar ? root.bar.fontFamily : Style.font.family
+    font.pixelSize: root.iconFontSize
+    text: root.icon
+  }
+  readonly property real iconYOffset: {
+    var t = iconInk.tightBoundingRect
+    return iconInk.height / 2 - (iconInk.ascent + t.y + t.height / 2)
+  }
   // Space around the pill: this is the only gap between two sysstats widgets,
   // the bar lays its modules out with spacing 0.
   readonly property real padding: positive(setting("padding", 0), 9)
@@ -342,6 +356,7 @@ BarWidget {
 
       OpticalGlyph {
         anchors.verticalCenter: parent.verticalCenter
+        anchors.verticalCenterOffset: root.iconYOffset
         width: Style.bar.iconCanvas
         height: Style.bar.iconCanvas
         text: root.icon
