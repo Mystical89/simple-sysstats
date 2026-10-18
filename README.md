@@ -1,4 +1,4 @@
-**English** | [Русский](#русский)
+**English** | [Русский](#russian)
 
 # Simple sysstats for Omarchy
 
@@ -98,6 +98,8 @@ still override the new defaults.
 MIT
 
 ---
+
+<a id="russian"></a>
 
 ## Русский
 
