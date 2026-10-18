@@ -1,3 +1,5 @@
+**English** | [Русский](#русский)
+
 # Simple sysstats for Omarchy
 
 CPU, GPU, RAM and disk usage (with CPU/GPU temperatures) for the Omarchy bar.
@@ -98,6 +100,8 @@ MIT
 ---
 
 ## Русский
+
+[↑ English](#simple-sysstats-for-omarchy)
 
 Форк [AlexMedela/simple-sysstats](https://github.com/AlexMedela/simple-sysstats):
 загрузка CPU, GPU, RAM и диска (с температурами CPU/GPU) для бара Omarchy,
