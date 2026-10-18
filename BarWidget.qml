@@ -19,7 +19,7 @@ BarWidget {
   moduleName: "amedela.simple-sysstats"
 
   readonly property var defaultIcons: ({
-    cpu: String.fromCodePoint(0xf4bc),
+    cpu: String.fromCodePoint(0xf061a),
     gpu: String.fromCodePoint(0xf08ae),
     ram: String.fromCodePoint(0xe266),
     disk: String.fromCodePoint(0xf02ca)
