@@ -37,6 +37,22 @@ BarWidget {
   readonly property int temperatureThreshold: positive(setting("temperatureThreshold", 0), 85)
   readonly property real fontSize: positive(setting("fontSize", 0), Style.font.body)
   readonly property real iconSize: positive(setting("iconSize", 0), Style.bar.iconFont)
+
+  // Nerd Font glyphs carry very different ink heights (a chip is taller than a
+  // disk), and OpticalGlyph only corrects horizontally, so a plain font size
+  // makes one widget sit visibly lower than its neighbours. Measure the glyph
+  // and scale it so every stat's icon paints the same height.
+  readonly property real iconInkHeight: Style.font.body
+  TextMetrics {
+    id: iconMetrics
+    font.family: root.bar ? root.bar.fontFamily : Style.font.family
+    font.pixelSize: 100
+    text: root.icon
+  }
+  readonly property real iconFontSize: {
+    var ink = iconMetrics.tightBoundingRect.height
+    return ink > 0 ? root.iconSize * root.iconInkHeight / ink : root.iconSize
+  }
   // Space around the pill: this is the only gap between two sysstats widgets,
   // the bar lays its modules out with spacing 0.
   readonly property real padding: positive(setting("padding", 0), 9)
@@ -330,7 +346,7 @@ BarWidget {
         text: root.icon
         color: root.fg
         fontFamily: root.bar ? root.bar.fontFamily : Style.font.family
-        fontSize: root.iconSize
+        fontSize: root.iconFontSize
       }
 
       // Values are drawn as separate pieces with a thin rule between them, so
