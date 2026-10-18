@@ -57,6 +57,7 @@ The widget is added once, showing CPU. Add it again for each stat you want and s
 | `onMiddleClick` | — | Command on middle-click |
 | `icon`, `iconSize`, `fontSize` | auto | Override the Nerd Font glyph and sizes |
 | `viewMode` | `0` | Starting view: `0` all values, `1` first value, `2` icon only |
+| `padding` | `9` | Space around the pill; it is the only gap between two sysstats widgets |
 
 ## Hardware support
 
@@ -174,6 +175,7 @@ omarchy plugin add https://github.com/Mystical89/simple-sysstats.git --enable
 | `onMiddleClick` | — | Команда по среднему клику |
 | `icon`, `iconSize`, `fontSize` | авто | Переопределить глиф Nerd Font и размеры |
 | `viewMode` | `0` | Стартовый режим: `0` все значения, `1` первое, `2` только иконка |
+| `padding` | `9` | Отступ вокруг плашки; он же единственный зазор между двумя виджетами sysstats |
 
 ### Поддержка железа
 

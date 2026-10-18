@@ -37,6 +37,9 @@ BarWidget {
   readonly property int temperatureThreshold: positive(setting("temperatureThreshold", 0), 85)
   readonly property real fontSize: positive(setting("fontSize", 0), Style.font.body)
   readonly property real iconSize: positive(setting("iconSize", 0), Style.bar.iconFont)
+  // Space around the pill: this is the only gap between two sysstats widgets,
+  // the bar lays its modules out with spacing 0.
+  readonly property real padding: positive(setting("padding", 0), 9)
   readonly property string icon: String(setting("icon", "")) || defaultIcons[stat]
 
   // 0 = all values, 1 = first value only, 2 = icon only.
@@ -303,7 +306,7 @@ BarWidget {
     bar: root.bar
     labelVisible: false
     hasVisualContent: true
-    fixedWidth: root.vertical ? -1 : row.implicitWidth + Style.space(17)
+    fixedWidth: root.vertical ? -1 : row.implicitWidth + Style.space(root.padding)
     fixedHeight: root.vertical ? column.implicitHeight + 12 : -1
     tooltipText: root.tooltipText
     onPressed: function(mouseButton) {

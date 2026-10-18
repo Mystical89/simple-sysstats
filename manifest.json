@@ -121,6 +121,16 @@
         "step": 1,
         "defaultValue": 0,
         "description": "0 = automatic."
+      },
+      {
+        "key": "padding",
+        "type": "integer",
+        "label": "Horizontal padding (px)",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "defaultValue": 9,
+        "description": "Space around the values. Lower brings neighbouring widgets closer."
       }
     ]
   }
