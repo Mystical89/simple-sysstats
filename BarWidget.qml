@@ -51,7 +51,8 @@ BarWidget {
   }
   readonly property real iconFontSize: {
     var ink = iconMetrics.tightBoundingRect.height
-    return ink > 0 ? root.iconSize * root.iconInkHeight / ink : root.iconSize
+    // `ink` is measured at pixelSize 100, so scale from there, not from iconSize.
+    return ink > 0 ? 100 * root.iconInkHeight / ink : root.iconSize
   }
   // Space around the pill: this is the only gap between two sysstats widgets,
   // the bar lays its modules out with spacing 0.
