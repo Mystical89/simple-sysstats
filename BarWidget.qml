@@ -55,19 +55,6 @@ BarWidget {
     return ink > 0 ? 100 * root.iconInkHeight / ink : root.iconSize
   }
 
-  // OpticalGlyph centres the glyph's line box, not its ink, so two glyphs of
-  // equal height can still sit a pixel or two apart. Shift each one so the
-  // painted ink is centred.
-  TextMetrics {
-    id: iconInk
-    font.family: root.bar ? root.bar.fontFamily : Style.font.family
-    font.pixelSize: root.iconFontSize
-    text: root.icon
-  }
-  readonly property real iconYOffset: {
-    var t = iconInk.tightBoundingRect
-    return iconInk.height / 2 - (iconInk.ascent + t.y + t.height / 2)
-  }
   // Space around the pill: this is the only gap between two sysstats widgets,
   // the bar lays its modules out with spacing 0.
   readonly property real padding: positive(setting("padding", 0), 9)
@@ -354,15 +341,32 @@ BarWidget {
       anchors.centerIn: parent
       spacing: Style.space(3)
 
-      OpticalGlyph {
+      // A plain Text instead of OpticalGlyph: the glyph has to be centred by
+      // its painted ink, not by its line box, or a tall chip sits a couple of
+      // pixels lower than a short disk. baselineOffset plus the metrics give
+      // the exact ink rectangle.
+      Item {
         anchors.verticalCenter: parent.verticalCenter
-        anchors.verticalCenterOffset: root.iconYOffset
         width: Style.bar.iconCanvas
         height: Style.bar.iconCanvas
-        text: root.icon
-        color: root.fg
-        fontFamily: root.bar ? root.bar.fontFamily : Style.font.family
-        fontSize: root.iconFontSize
+
+        TextMetrics {
+          id: glyphMetrics
+          font.family: glyph.font.family
+          font.pixelSize: glyph.font.pixelSize
+          text: glyph.text
+        }
+
+        Text {
+          id: glyph
+          text: root.icon
+          color: root.fg
+          font.family: root.bar ? root.bar.fontFamily : Style.font.family
+          font.pixelSize: root.iconFontSize
+          renderType: Text.NativeRendering
+          x: (parent.width - glyphMetrics.tightBoundingRect.width) / 2 - glyphMetrics.tightBoundingRect.x
+          y: parent.height / 2 - (glyphMetrics.tightBoundingRect.y + glyphMetrics.tightBoundingRect.height / 2) - baselineOffset
+        }
       }
 
       // Values are drawn as separate pieces with a thin rule between them, so
