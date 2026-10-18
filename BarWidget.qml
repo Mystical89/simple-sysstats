@@ -35,8 +35,8 @@ BarWidget {
   readonly property bool showTemperature: setting("showTemperature", true) !== false
   readonly property int usageThreshold: positive(setting("usageThreshold", 0), 90)
   readonly property int temperatureThreshold: positive(setting("temperatureThreshold", 0), 85)
-  readonly property real fontSize: positive(setting("fontSize", 0), Style.font.body + 2)
-  readonly property real iconSize: positive(setting("iconSize", 0), Math.round(fontSize * (stat === "gpu" ? 1.8 : 1.07)))
+  readonly property real fontSize: positive(setting("fontSize", 0), Style.font.body)
+  readonly property real iconSize: positive(setting("iconSize", 0), Style.bar.iconFont)
   readonly property string icon: String(setting("icon", "")) || defaultIcons[stat]
 
   // 0 = all values, 1 = first value only, 2 = icon only.
@@ -303,7 +303,7 @@ BarWidget {
     bar: root.bar
     labelVisible: false
     hasVisualContent: true
-    fixedWidth: root.vertical ? -1 : row.implicitWidth + 15
+    fixedWidth: root.vertical ? -1 : row.implicitWidth + Style.space(17)
     fixedHeight: root.vertical ? column.implicitHeight + 12 : -1
     tooltipText: root.tooltipText
     onPressed: function(mouseButton) {
@@ -318,15 +318,16 @@ BarWidget {
       id: row
       visible: !root.vertical
       anchors.centerIn: parent
-      spacing: 5
+      spacing: Style.space(3)
 
-      Text {
+      OpticalGlyph {
         anchors.verticalCenter: parent.verticalCenter
+        width: Style.bar.iconCanvas
+        height: Style.bar.iconCanvas
         text: root.icon
         color: root.fg
-        font.family: root.bar ? root.bar.fontFamily : Style.font.family
-        font.pixelSize: root.iconSize
-        renderType: Text.NativeRendering
+        fontFamily: root.bar ? root.bar.fontFamily : Style.font.family
+        fontSize: root.iconSize
       }
 
       // Values are drawn as separate pieces with a thin rule between them, so

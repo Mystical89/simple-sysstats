@@ -67,6 +67,21 @@ The widget is added once, showing CPU. Add it again for each stat you want and s
 omarchy plugin remove amedela.simple-sysstats
 ```
 
+## This fork
+
+Fork of [AlexMedela/simple-sysstats](https://github.com/AlexMedela/simple-sysstats)
+that matches the stock Omarchy bar typography out of the box:
+
+- values use `Style.font.body` (12) instead of `body + 2`;
+- the icon is drawn with `OpticalGlyph` in a `Style.bar.iconCanvas` (16) box at
+  `Style.bar.iconFont` (13) instead of a plain 15 px `Text`, so the glyph is
+  optically centred like every other bar icon;
+- icon-to-text spacing and the pill padding come from `Style.space(...)`
+  (3 and 17), so they scale with the bar's font size.
+
+Nothing else changes: same settings, same behaviour, `fontSize` / `iconSize`
+still override the new defaults.
+
 ## License
 
 MIT
