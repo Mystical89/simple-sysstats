@@ -21,7 +21,7 @@ BarWidget {
   readonly property var defaultIcons: ({
     cpu: String.fromCodePoint(0xf061a),
     gpu: String.fromCodePoint(0xf08ae),
-    ram: String.fromCodePoint(0xe266),
+    ram: String.fromCodePoint(0xefc5),
     disk: String.fromCodePoint(0xf02ca)
   })
 
