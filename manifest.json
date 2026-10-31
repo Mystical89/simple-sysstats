@@ -3,7 +3,11 @@
   "id": "amedela.simple-sysstats",
   "name": "Simple sysstats",
   "version": "1.0.0",
-  "author": "Mystical89 (based on AlexMedela)",
+  "author": "Mystical89",
+  "basedOn": {
+    "author": "AlexMedela",
+    "url": "https://github.com/AlexMedela/simple-sysstats"
+  },
   "license": "MIT",
   "description": "CPU, GPU, RAM and disk usage with temperatures, read directly from /proc and /sys",
   "kinds": [
